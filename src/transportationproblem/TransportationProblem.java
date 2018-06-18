@@ -148,11 +148,14 @@ public class TransportationProblem {
         LinkedList<Shipment> path = matrixToList();
         path.addFirst(s);
 
+        // remove (and keep removing) elements that do not have a
+        // vertical AND horizontal neighbor
         while (path.removeIf(e -> {
             Shipment[] nbrs = getNeighbors(e, path);
             return nbrs[0] == null || nbrs[1] == null;
         }));
 
+        // place the remaining elements in the correct plus-minus order
         Shipment[] stones = path.toArray(new Shipment[path.size()]);
         Shipment prev = s;
         for (int i = 0; i < stones.length; i++) {
