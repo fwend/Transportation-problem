@@ -124,7 +124,7 @@ public class TransportationProblem {
             }
         }
 
-        if (move != null) {
+        if (move != null && leaving != null) {
             double q = leaving.quantity;
             boolean plus = true;
             for (Shipment s : move) {
@@ -143,6 +143,7 @@ public class TransportationProblem {
                 .collect(toCollection(LinkedList::new));
     }
 
+    @SuppressWarnings("empty-statement")
     static Shipment[] getClosedPath(Shipment s) {
         LinkedList<Shipment> path = matrixToList();
         path.addFirst(s);
